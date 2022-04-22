@@ -126,11 +126,50 @@ public class PlayerMovement : MonoBehaviour
         return newLocation;
     }
 
+    public void SetPath(CinemachinePathBase newPath)
+    {
+        path = newPath;
+    }
+
+    public void ResetPosition()
+    {
+        //transform.position = path.FindClosestPoint(transform.position, path, -1, 6);
+        m_Position = 0;
+        transform.position = path.EvaluatePositionAtUnit(m_Position, m_PositionUnits);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
             // Player died
+            Debug.Log("Player Died");
         }
+
+        if (other.gameObject.CompareTag("Switch"))
+        {
+            // Get switch script and activate switch function
+            SwitchScript script = other.gameObject.GetComponent<SwitchScript>();
+            if (!script.GetActivated())
+                script.SwitchPaths(this);
+        }
+    }
+
+    IEnumerator DeathSequence(float timer)
+    {
+        canMove = false;
+
+        // Play death animation
+
+        yield return new WaitForSeconds(timer);
+
+        // Fade screen to white
+
+        // Respawn player and enemies
+
+        // Fade back to screen
+
+        // Wait, then set canmove to true
+        canMove = true;
     }
 }
