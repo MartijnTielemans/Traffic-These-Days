@@ -11,9 +11,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float maxSpeed = 40f;
     [SerializeField] float deceleration = 1.2f;
-    [SerializeField] float movement;
+    float movement;
     bool canMove;
-    public bool movingForward, movingBackward;
+    bool movingForward, movingBackward;
 
     [Space]
 
@@ -124,5 +124,13 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 newLocation = new Vector3(path.EvaluatePositionAtUnit(m_Position, m_PositionUnits).x, path.EvaluatePositionAtUnit(m_Position, m_PositionUnits).y, path.EvaluatePositionAtUnit(m_Position, m_PositionUnits).z);
         return newLocation;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            // Player died
+        }
     }
 }

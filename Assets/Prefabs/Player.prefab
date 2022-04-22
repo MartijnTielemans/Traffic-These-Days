@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4991957770565443100}
   - component: {fileID: 4991957770565443103}
+  - component: {fileID: 5054253481109715574}
+  - component: {fileID: 589635092243149381}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -48,12 +50,38 @@ MonoBehaviour:
   moveSpeed: 0.5
   maxSpeed: 14
   deceleration: 5
-  movement: 0
-  movingForward: 0
-  movingBackward: 0
   path: {fileID: 0}
   m_PositionUnits: 1
   m_Position: 0
+--- !u!65 &5054253481109715574
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4991957770565443101}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7143992, y: 1.6488967, z: 3.5673742}
+  m_Center: {x: 0, y: 1.0861969, z: 0}
+--- !u!54 &589635092243149381
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4991957770565443101}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4991957770912607055
 GameObject:
   m_ObjectHideFlags: 0
