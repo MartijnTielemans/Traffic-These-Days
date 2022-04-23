@@ -4870,11 +4870,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.5
-  maxSpeed: 14
+  maxSpeed: 18
   deceleration: 5
   path: {fileID: 0}
   m_PositionUnits: 1
   m_Position: 0
+  deathTimer: 1
 --- !u!65 &5054253481109715574
 BoxCollider:
   m_ObjectHideFlags: 0

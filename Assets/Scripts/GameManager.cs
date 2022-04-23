@@ -14,6 +14,22 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] float[] levelTimes;
     int currentLevel;
 
+    // gets every object with the enemy tag in the scene
+    public void GetEnemies()
+    {
+        List<GameObject> enemyList = new();
+        List<EnemyMovement> scripts = new();
+
+        enemyList.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+
+        for (int i = 0; i < enemyList.Count; i++)
+        {
+            scripts.Add(enemyList[i].GetComponent<EnemyMovement>());
+        }
+
+        enemies = scripts.ToArray();
+    }
+
     public void FadeIn()
     {
         fade.Play("Fade_In");

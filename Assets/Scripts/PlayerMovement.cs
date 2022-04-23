@@ -52,6 +52,9 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Get gamemanager to save every enemy in scene
+        GameManager.Instance.GetEnemies();
+
         canMove = true;
     }
 
@@ -141,6 +144,7 @@ public class PlayerMovement : MonoBehaviour
         //transform.position = path.FindClosestPoint(transform.position, path, -1, 6);
         m_Position = 0;
         transform.position = path.EvaluatePositionAtUnit(m_Position, m_PositionUnits);
+        transform.rotation = TrackRotation(m_Position);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -163,6 +167,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.gameObject.CompareTag("Goal"))
         {
+            canMove = false;
+
             // Call fade and end level
             GameManager.Instance.LevelEnd();
         }
