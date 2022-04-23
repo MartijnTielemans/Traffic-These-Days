@@ -88,6 +88,7 @@ public class GameManager : Singleton<GameManager>
         yield return new WaitForSeconds(1f);
 
         // Switch vcams
+        gameEndVCam = GameObject.Find("EndVCam");
         gameEndVCam.SetActive(true);
 
         // Wait, then fade out
