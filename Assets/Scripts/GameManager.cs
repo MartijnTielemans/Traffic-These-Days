@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] Animator fade;
     [SerializeField] EnemyMovement[] enemies;
+
+    [Space]
+    [Header("Levels")]
+    [SerializeField] string[] levelStrings;
+    [SerializeField] float[] levelTimes;
+    int currentLevel;
 
     public void FadeIn()
     {
@@ -36,6 +43,10 @@ public class GameManager : Singleton<GameManager>
         FadeOut();
         yield return new WaitForSeconds(2);
 
+        // Increase current Level by 1
+        currentLevel++;
+
         // Go to next level
+        SceneManager.LoadScene(levelStrings[currentLevel]);
     }
 }
