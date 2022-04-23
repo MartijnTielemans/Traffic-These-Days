@@ -18,12 +18,14 @@ public class EnemyMovement : MonoBehaviour
     [Header("Movement")]
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] int direction = 1;
+    int startDirection;
     bool canMove;
 
     // Start is called before the first frame update
     void Start()
     {
         startM_Position = m_Position;
+        startDirection = direction;
         canMove = true;
     }
 
@@ -97,6 +99,11 @@ public class EnemyMovement : MonoBehaviour
         direction = -direction;
     }
 
+    public void SetCanMove(bool value)
+    {
+        canMove = value;
+    }
+
     Quaternion TrackRotation(float distanceAlongPath)
     {
         m_Position = path.StandardizeUnit(distanceAlongPath, m_PositionUnits);
@@ -108,5 +115,13 @@ public class EnemyMovement : MonoBehaviour
     {
         Vector3 newLocation = new Vector3(path.EvaluatePositionAtUnit(m_Position, m_PositionUnits).x, path.EvaluatePositionAtUnit(m_Position, m_PositionUnits).y, path.EvaluatePositionAtUnit(m_Position, m_PositionUnits).z);
         return newLocation;
+    }
+
+    public void ResetPosition()
+    {
+        m_Position = startM_Position;
+        transform.position = GetNewPosition();
+        direction = startDirection;
+        canMove = true;
     }
 }

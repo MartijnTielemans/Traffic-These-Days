@@ -22,6 +22,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] CinemachinePathBase.PositionUnits m_PositionUnits = CinemachinePathBase.PositionUnits.Distance;
     [SerializeField] float m_Position;
 
+    [Space]
+
+    [Header("Sequences")]
+    [SerializeField] float deathTimer = 1f;
+
     private void OnEnable()
     {
         controls.Player.Enable();
@@ -140,10 +145,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy") && canMove)
         {
             // Player died
             Debug.Log("Player Died");
+            other.gameObject.GetComponent<EnemyMovement>().SetCanMove(false);
+            StartCoroutine(DeathSequence(deathTimer));
         }
 
         if (other.gameObject.CompareTag("Switch"))
@@ -153,6 +160,12 @@ public class PlayerMovement : MonoBehaviour
             if (!script.GetActivated())
                 script.SwitchPaths(this);
         }
+
+        if (other.gameObject.CompareTag("Goal"))
+        {
+            // Call fade and end level
+            GameManager.Instance.LevelEnd();
+        }
     }
 
     IEnumerator DeathSequence(float timer)
@@ -161,15 +174,22 @@ public class PlayerMovement : MonoBehaviour
 
         // Play death animation
 
-        yield return new WaitForSeconds(timer);
+        yield return new WaitForSeconds(timer/2);
 
         // Fade screen to white
+        GameManager.Instance.FadeIn();
 
         // Respawn player and enemies
+        yield return new WaitForSeconds(timer);
+        ResetPosition();
+        GameManager.Instance.ResetEnemyPositions();
 
         // Fade back to screen
+        yield return new WaitForSeconds(timer/2);
+        GameManager.Instance.FadeOut();
 
         // Wait, then set canmove to true
+        yield return new WaitForSeconds(timer);
         canMove = true;
     }
 }
