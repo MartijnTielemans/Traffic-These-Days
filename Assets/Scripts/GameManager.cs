@@ -15,6 +15,11 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] float[] levelTimes;
     int currentLevel;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     // gets every object with the enemy tag in the scene
     public void GetEnemies()
     {
@@ -29,6 +34,11 @@ public class GameManager : Singleton<GameManager>
         }
 
         enemies = scripts.ToArray();
+    }
+
+    public void GetFade()
+    {
+        fade = GameObject.Find("Fade").GetComponent<Animator>();
     }
 
     public void FadeIn()
@@ -57,7 +67,7 @@ public class GameManager : Singleton<GameManager>
     IEnumerator LevelEndSequence()
     {
         yield return new WaitForSeconds(1);
-        FadeOut();
+        FadeIn();
         yield return new WaitForSeconds(2);
 
         // Increase current Level by 1

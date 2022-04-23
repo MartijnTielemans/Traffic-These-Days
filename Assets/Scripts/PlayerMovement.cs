@@ -54,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Get gamemanager to save every enemy in scene
         GameManager.Instance.GetEnemies();
+        GameManager.Instance.GetFade();
 
         canMove = true;
     }
