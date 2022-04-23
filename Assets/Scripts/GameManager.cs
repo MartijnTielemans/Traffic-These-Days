@@ -7,6 +7,7 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] Animator fade;
     [SerializeField] EnemyMovement[] enemies;
+    [SerializeField] GameObject gameEndVCam;
 
     [Space]
     [Header("Levels")]
@@ -77,9 +78,13 @@ public class GameManager : Singleton<GameManager>
         yield return new WaitForSeconds(1f);
 
         // Switch vcams
+        gameEndVCam.SetActive(true);
 
         // Wait, then fade out
+        yield return new WaitForSeconds(3.5f);
+        FadeOut();
 
         // Switch the scene
+        yield return new WaitForSeconds(1f);
     }
 }

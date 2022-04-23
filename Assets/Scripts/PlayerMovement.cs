@@ -172,6 +172,14 @@ public class PlayerMovement : MonoBehaviour
             // Call fade and end level
             GameManager.Instance.LevelEnd();
         }
+
+        if (other.gameObject.CompareTag("GameEnd"))
+        {
+            canMove = false;
+
+            // Call game end
+            GameManager.Instance.StartGameEnd();
+        }
     }
 
     IEnumerator DeathSequence(float timer)
