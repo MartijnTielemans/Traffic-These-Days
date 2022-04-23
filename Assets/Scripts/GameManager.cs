@@ -65,4 +65,21 @@ public class GameManager : Singleton<GameManager>
         // Go to next level
         SceneManager.LoadScene(levelStrings[currentLevel]);
     }
+
+    public void StartGameEnd()
+    {
+        StartCoroutine(GameEndSequence());
+    }
+
+    IEnumerator GameEndSequence()
+    {
+        // wait for a bit
+        yield return new WaitForSeconds(1f);
+
+        // Switch vcams
+
+        // Wait, then fade out
+
+        // Switch the scene
+    }
 }
