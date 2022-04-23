@@ -49,6 +49,28 @@
                 },
                 {
                     "name": "",
+                    "id": "12cb8153-6834-409a-91a0-96a3e70af198",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Forward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "40ff4786-138b-4cdc-96cd-244f77ae9aa1",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Forward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "e92139ac-540a-4008-a779-51799c7d164a",
                     "path": "<Keyboard>/x",
                     "interactions": "",
@@ -62,6 +84,28 @@
                     "name": "",
                     "id": "e665b88b-fc1e-44f1-8055-e6346cc7b44c",
                     "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Backward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9b6aa119-c274-410b-b6bb-9ad356f00b23",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Backward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ff3007ce-98ad-4892-b807-5d58cd7341df",
+                    "path": "<Keyboard>/ctrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
