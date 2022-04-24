@@ -3072,13 +3072,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fade: {fileID: 0}
   enemies: []
-  gameEndVCam: {fileID: 0}
   levelStrings:
   - Level1
   - Level2
   - Level3
   - Level4
-  levelTimes: []
+  gameTimer: 0
 --- !u!4 &1770392909
 Transform:
   m_ObjectHideFlags: 0

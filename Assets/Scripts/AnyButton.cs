@@ -1,13 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class AnyButton : MonoBehaviour
 {
     [SerializeField] Animator fade;
     [SerializeField] bool canPress = true;
     GameControls controls;
+    [SerializeField] TextMeshProUGUI timeText;
+
+    private void Start()
+    {
+        TimeSpan finaltime = GameManager.Instance.GetTimer();
+        Debug.Log("timer texted " + finaltime.ToString("mm':'ss'.'ff"));
+        timeText.text = finaltime.ToString("mm':'ss'.'ff");
+    }
 
     private void OnEnable()
     {
@@ -28,8 +38,6 @@ public class AnyButton : MonoBehaviour
 
     void Continue()
     {
-        Debug.Log(" Here");
-
         if (canPress)
         {
             StartCoroutine(ContinueSequence());
@@ -41,7 +49,7 @@ public class AnyButton : MonoBehaviour
     {
         yield return new WaitForSeconds(.5f);
 
-        fade.Play(" Fade_In");
+        fade.Play("Fade_In");
 
         yield return new WaitForSeconds(1f);
 

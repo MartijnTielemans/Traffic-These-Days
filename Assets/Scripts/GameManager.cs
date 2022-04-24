@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,17 +8,34 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] Animator fade;
     [SerializeField] EnemyMovement[] enemies;
-    [SerializeField] GameObject gameEndVCam;
+
+    // For the ending sequence
+    GameObject regularCam;
 
     [Space]
     [Header("Levels")]
     [SerializeField] string[] levelStrings;
-    [SerializeField] float[] levelTimes;
+    [SerializeField] float gameTimer;
+    TimeSpan timePlaying;
+    bool isTiming;
     int currentLevel;
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (GameManager.Instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        // For the timer functions
+        if (isTiming)
+        {
+            gameTimer += Time.deltaTime;
+            timePlaying = TimeSpan.FromSeconds(gameTimer);
+        }
     }
 
     // gets every object with the enemy tag in the scene
@@ -51,6 +69,26 @@ public class GameManager : Singleton<GameManager>
         fade.Play("Fade_Out");
     }
 
+    public string[] GetLevels()
+    {
+        return levelStrings;
+    }
+
+    public void StartTimer()
+    {
+        isTiming = true;
+    }
+
+    public void PauseTimer()
+    {
+        isTiming = false;
+    }
+
+    public TimeSpan GetTimer()
+    {
+        return timePlaying;
+    }
+
     public void ResetEnemyPositions()
     {
         for (int i = 0; i < enemies.Length; i++)
@@ -61,6 +99,7 @@ public class GameManager : Singleton<GameManager>
 
     public void LevelEnd()
     {
+        PauseTimer();
         StartCoroutine(LevelEndSequence());
     }
 
@@ -79,6 +118,7 @@ public class GameManager : Singleton<GameManager>
 
     public void StartGameEnd()
     {
+        PauseTimer();
         StartCoroutine(GameEndSequence());
     }
 
@@ -88,14 +128,21 @@ public class GameManager : Singleton<GameManager>
         yield return new WaitForSeconds(1f);
 
         // Switch vcams
-        gameEndVCam = GameObject.Find("EndVCam");
-        gameEndVCam.SetActive(true);
+        regularCam = GameObject.Find("VCam");
+        regularCam.SetActive(false);
 
         // Wait, then fade out
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(2f);
         FadeOut();
 
         // Switch the scene
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("EndingScene");
+    }
+
+    public void ResetValues()
+    {
+        currentLevel = 0;
+        gameTimer = 0;
     }
 }

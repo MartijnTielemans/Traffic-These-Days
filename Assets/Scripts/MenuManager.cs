@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour
 
     public void StartButton()
     {
+        GameManager.Instance.ResetValues();
         StartCoroutine(StartSequence());
     }
 
@@ -21,7 +22,7 @@ public class MenuManager : MonoBehaviour
 
         yield return new WaitForSeconds(timer);
 
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene(GameManager.Instance.GetLevels()[0]);
     }
 
     public void ExitButton()

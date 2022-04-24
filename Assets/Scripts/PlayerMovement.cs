@@ -57,6 +57,9 @@ public class PlayerMovement : MonoBehaviour
         GameManager.Instance.GetFade();
 
         canMove = true;
+
+        // When the level starts, start the timer
+        GameManager.Instance.StartTimer();
     }
 
     // Update is called once per frame
