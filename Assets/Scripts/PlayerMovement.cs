@@ -26,6 +26,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Sequences")]
     [SerializeField] float deathTimer = 1f;
+    [SerializeField] AudioSource crashSound;
+    [SerializeField] AudioSource switchSound;
+    [SerializeField] AudioSource goalSound;
 
     private void OnEnable()
     {
@@ -157,6 +160,7 @@ public class PlayerMovement : MonoBehaviour
         {
             // Player died
             Debug.Log("Player Died");
+            crashSound.Play();
             other.gameObject.GetComponent<EnemyMovement>().SetCanMove(false);
             StartCoroutine(DeathSequence(deathTimer));
         }
@@ -166,12 +170,16 @@ public class PlayerMovement : MonoBehaviour
             // Get switch script and activate switch function
             SwitchScript script = other.gameObject.GetComponent<SwitchScript>();
             if (!script.GetActivated())
+            {
+                switchSound.Play();
                 script.SwitchPaths(this);
+            }
         }
 
         if (other.gameObject.CompareTag("Goal"))
         {
             canMove = false;
+            goalSound.Play();
 
             // Call fade and end level
             GameManager.Instance.LevelEnd();

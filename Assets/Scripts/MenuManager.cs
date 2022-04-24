@@ -7,6 +7,7 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] Animator fade;
     [SerializeField] float timer = 1.2f;
+    [SerializeField] AudioSource honkSound;
 
     public void StartButton()
     {
@@ -16,6 +17,8 @@ public class MenuManager : MonoBehaviour
 
     IEnumerator StartSequence()
     {
+        honkSound.Play();
+
         yield return new WaitForSeconds(timer / 5);
 
         fade.Play("Fade_In");
