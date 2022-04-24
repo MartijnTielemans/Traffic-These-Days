@@ -104,7 +104,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _HatchingSpeed: 2
-    - _HatchingStrength: 0.4
+    - _HatchingStrength: 0.2
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
