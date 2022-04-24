@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] Animator fade;
+    [SerializeField] AudioSource music;
     [SerializeField] EnemyMovement[] enemies;
 
     // For the ending sequence
@@ -67,6 +68,17 @@ public class GameManager : Singleton<GameManager>
     public void FadeOut()
     {
         fade.Play("Fade_Out");
+    }
+
+    public void StartMusic()
+    {
+        music.Stop();
+        music.Play();
+    }
+
+    public void FadeOutMusic()
+    {
+        StartCoroutine(FadeMusic(music, 2f));
     }
 
     public string[] GetLevels()
@@ -144,5 +156,20 @@ public class GameManager : Singleton<GameManager>
     {
         currentLevel = 0;
         gameTimer = 0;
+    }
+
+    IEnumerator FadeMusic(AudioSource sound, float duration)
+    {
+        float currentTime = 0;
+        float start = sound.volume;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            sound.volume = Mathf.Lerp(start, 0, currentTime / duration);
+            yield return null;
+        }
+
+        yield break;
     }
 }
