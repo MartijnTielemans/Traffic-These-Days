@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] AudioSource crashSound;
     [SerializeField] AudioSource switchSound;
     [SerializeField] AudioSource goalSound;
+    [SerializeField] GameObject crashParticle;
 
     private void OnEnable()
     {
@@ -199,7 +200,7 @@ public class PlayerMovement : MonoBehaviour
         canMove = false;
 
         // Play death animation
-
+        crashParticle.SetActive(true);
         yield return new WaitForSeconds(timer/2);
 
         // Fade screen to white
@@ -208,6 +209,7 @@ public class PlayerMovement : MonoBehaviour
         // Respawn player and enemies
         yield return new WaitForSeconds(timer);
         ResetPosition();
+        crashParticle.SetActive(false);
         GameManager.Instance.ResetEnemyPositions();
 
         // Fade back to screen
